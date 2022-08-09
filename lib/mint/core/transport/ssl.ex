@@ -504,7 +504,7 @@ defmodule Mint.Core.Transport.SSL do
   # therefore the only pattern used in commercially issued certificates.
   defp match_fun({:dns_id, reference}, {:dNSName, [?*, ?. | presented]}) do
     case domain_without_host(reference) do
-      '' ->
+      ~c"" ->
         :default
 
       domain ->

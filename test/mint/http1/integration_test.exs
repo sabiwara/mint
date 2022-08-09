@@ -154,7 +154,7 @@ defmodule Mint.HTTP1.IntegrationTest do
                )
 
       # OTP 21.3 changes the format of SSL errors. Let's support both ways for now.
-      assert reason == {:tls_alert, 'unknown ca'} or
+      assert reason == {:tls_alert, ~c"unknown ca"} or
                match?({:tls_alert, {:unknown_ca, _}}, reason),
              "expecter reason to look like {:tls_alert, _}, got: #{inspect(reason)}"
     end
@@ -183,7 +183,7 @@ defmodule Mint.HTTP1.IntegrationTest do
 
       # OTP 21.3 changes the format of SSL errors. Let's support both ways for now.
       # Newer OTP versions treat empty list for `cacerts` as if the option was not set
-      assert reason == {:tls_alert, 'unknown ca'} or
+      assert reason == {:tls_alert, ~c"unknown ca"} or
                match?({:tls_alert, {:unknown_ca, _}}, reason) or
                reason == {:options, {:cacertfile, []}} or :closed
     end
@@ -200,7 +200,7 @@ defmodule Mint.HTTP1.IntegrationTest do
                )
 
       # OTP 21.3 changes the format of SSL errors. Let's support both ways for now.
-      assert reason == {:tls_alert, 'unknown ca'} or
+      assert reason == {:tls_alert, ~c"unknown ca"} or
                match?({:tls_alert, {:unknown_ca, _}}, reason)
 
       assert {:ok, _conn} =
@@ -217,7 +217,7 @@ defmodule Mint.HTTP1.IntegrationTest do
                )
 
       # OTP 21.3 changes the format of SSL errors. Let's support both ways for now.
-      assert reason == {:tls_alert, 'handshake failure'} or
+      assert reason == {:tls_alert, ~c"handshake failure"} or
                match?({:tls_alert, {:handshake_failure, _}}, reason)
 
       assert {:ok, _conn} =
